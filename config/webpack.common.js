@@ -1,14 +1,17 @@
 const paths = require('./paths')
+const pages = require('./pages');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { merge } = require('webpack-merge')
 
-module.exports = {
-  // Where webpack looks to start building the bundle
-  entry: [paths.src + '/index.js'],
-
+const commonConfig = {
   // Where webpack outputs the assets and bundles
+  entry: {
+    // vendor: [
+    //   // not use npm mange js that third party lib
+    // ],
+  },
   output: {
     path: paths.build,
     filename: '[name].bundle.js',
@@ -31,15 +34,6 @@ module.exports = {
           },
         },
       ],
-    }),
-
-    // Generates an HTML file from a template
-    // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
-    new HtmlWebpackPlugin({
-      title: 'webpack Boilerplate',
-      favicon: paths.src + '/images/favicon.png',
-      template: paths.src + '/template.html', // template file
-      filename: 'index.html', // output file
     }),
   ],
 
@@ -68,3 +62,5 @@ module.exports = {
     ],
   },
 }
+
+module.exports = merge(commonConfig, ...pages);
