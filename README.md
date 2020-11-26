@@ -4,6 +4,12 @@
 
 Sensible webpack 5 boilerplate using Babel, PostCSS and Sass with a hot dev server and an optimized production build.
 
+## Hank todo list
+
+- [ ] Multiple-Page
+- [ ] eslint: airbnb (open branch)
+- [ ] pug (open branch)
+
 ## Installation
 
 Clone this repo and npm install.
