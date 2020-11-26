@@ -6,8 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const createPage = ({
   outputPath = '',
   title = 'What\'s your title',
-  favicon = `${paths.src}/images/favicon.png`,
-  template = `${paths.src}/template.html`,
+  favicon = '/images/favicon.png',
+  template = '../template.html',
   entry,
   chunks,
 } = {}) => ({
@@ -18,8 +18,8 @@ const createPage = ({
     new HtmlWebpackPlugin({
       filename: `${outputPath && outputPath + '/'}index.html`,
       title,
-      favicon,
-      template,
+      favicon: path.join(paths.src, favicon),
+      template: path.join(paths.src, 'pages', template),
       chunks,
     })
   ]
@@ -37,18 +37,20 @@ module.exports = [
   }),
   createPage({
     title: 'About',
+    template: '/about/index.html',
     entry: {
       about: combinePagePath('about'),
     },
-    outputPath: 'about',
     chunks: ['about', 'vendor'],
+    outputPath: 'about',
   }),
   createPage({
     title: 'Article',
+    template: '/article/index.html',
     entry: {
       article: combinePagePath('article'),
     },
-    outputPath: 'article',
     chunks: ['article', 'vendor'],
+    outputPath: 'article',
   }),
 ];

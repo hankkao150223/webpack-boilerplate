@@ -2,7 +2,7 @@
 import '../../styles/index.scss'
 
 const heading = document.createElement('h1')
-heading.textContent = 'about page'
+heading.textContent = 'about content'
 
 const app = document.querySelector('#root')
 app.append(heading)

@@ -6,7 +6,7 @@ Sensible webpack 5 boilerplate using Babel, PostCSS and Sass with a hot dev serv
 
 ## Hank todo list
 
-- [ ] Multiple-Page
+- [x] Multiple-Page
 - [ ] eslint: airbnb (open branch)
 - [ ] pug (open branch)
 
