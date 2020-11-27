@@ -7,6 +7,7 @@ Sensible webpack 5 boilerplate using Babel, PostCSS and Sass with a hot dev serv
 ## Hank todo list
 
 - [x] Multiple-Page
+  - 參考 [webpack-seed](https://github.com/Array-Huang/webpack-seed) project 實作
 - [ ] eslint: airbnb (open branch)
 - [ ] pug (open branch)
 

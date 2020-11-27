@@ -1,4 +1,4 @@
-const paths = require('./paths')
+const dirVars = require('./utils/dir-vars.config.js')
 
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
@@ -14,7 +14,7 @@ module.exports = merge(common, {
   // Spin up a server for quick development
   devServer: {
     historyApiFallback: true,
-    contentBase: paths.build,
+    contentBase: dirVars.build,
     open: true,
     compress: true,
     hot: true,

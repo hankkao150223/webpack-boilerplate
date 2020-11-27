@@ -1,4 +1,4 @@
-const paths = require('./paths')
+const dirVars = require('./utils/dir-vars.config.js')
 const pages = require('./pages');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -13,7 +13,7 @@ const commonConfig = {
     // ],
   },
   output: {
-    path: paths.build,
+    path: dirVars.build,
     filename: '[name].bundle.js',
     publicPath: '/',
   },
@@ -27,7 +27,7 @@ const commonConfig = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: paths.public,
+          from: dirVars.public,
           to: 'assets',
           globOptions: {
             ignore: ['*.DS_Store'],

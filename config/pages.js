@@ -1,4 +1,5 @@
-const paths = require('./paths')
+const dirVars = require('./utils/dir-vars.config.js')
+const pageEntries = require('./utils/page-entries.config.js')
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -18,39 +19,34 @@ const createPage = ({
     new HtmlWebpackPlugin({
       filename: `${outputPath && outputPath + '/'}index.html`,
       title,
-      favicon: path.join(paths.src, favicon),
-      template: path.join(paths.src, 'pages', template),
+      favicon: path.join(dirVars.src, favicon),
+      template: path.join(dirVars.src, 'pages', template),
       chunks,
     })
   ]
 })
 
-const combinePagePath = (pageName) => path.join(paths.src, 'pages', pageName, 'index.js')
+const loadPages = () => {
+  return pageEntries.map(({
+    moduleName,
+    templateSettings = {},
+    outputPath,
+  }) => {
+    if (!moduleName) {
+      throw new Error('moduleName is undefined');
+    }
+    return createPage({
+      title: templateSettings.title,
+      template: templateSettings.isDefault
+        ? undefined
+        : templateSettings.path || path.join(moduleName, 'index.html'),
+      entry: {
+        [moduleName]: path.join(dirVars.src, 'pages', moduleName, 'index.js'),
+      },
+      chunks: [moduleName, 'vendor'],
+      outputPath: moduleName,
+    });
+  });
+};
 
-module.exports = [
-  createPage({
-    title: 'Home',
-    entry: {
-      home: combinePagePath(''),
-    },
-    chunks: ['home', 'vendor'],
-  }),
-  createPage({
-    title: 'About',
-    template: '/about/index.html',
-    entry: {
-      about: combinePagePath('about'),
-    },
-    chunks: ['about', 'vendor'],
-    outputPath: 'about',
-  }),
-  createPage({
-    title: 'Article',
-    template: '/article/index.html',
-    entry: {
-      article: combinePagePath('article'),
-    },
-    chunks: ['article', 'vendor'],
-    outputPath: 'article',
-  }),
-];
+module.exports = loadPages();
